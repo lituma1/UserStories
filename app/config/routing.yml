@@ -1,0 +1,5 @@
+us:
+    resource: "@USBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
