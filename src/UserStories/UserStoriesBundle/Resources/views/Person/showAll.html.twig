@@ -2,6 +2,14 @@
 
 {% block title %}USBundle:Person:show{% endblock %}
 
+
+
 {% block body %}
-<h1>Welcome to the Person:show page</h1>
+<h1>Twoje kontakty</h1>
+{% for person in persons %}
+    {{person.name}} {{person.surname}}
+    <hr>
+    {% endfor %}
+
+<a href="{{path('new_action')}}">Dodaj nową osobę</a>
 {% endblock %}
