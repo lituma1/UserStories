@@ -40,7 +40,7 @@ class PersonController extends Controller {
     }
 
     /**
-     * @Route("/{id}/modify")
+     * @Route("/{id}/modify", name="modyfy_action")
      * @Method({"GET", "POST"})
      */
     public function modifyAction($id) {
@@ -50,7 +50,7 @@ class PersonController extends Controller {
     }
 
     /**
-     * @Route("/{id}/delete")
+     * @Route("/{id}/delete", name="delete_action")
      */
     public function deleteAction($id) {
         $repository = $this->getDoctrine()->getRepository('USBundle:Person');
