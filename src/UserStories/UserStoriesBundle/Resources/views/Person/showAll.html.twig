@@ -1,18 +1,18 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}USBundle:Person:show{% endblock %}
+
 
 
 
 {% block body %}
-<h1>Twoje kontakty</h1>
+<h1>Moje kontakty</h1>
 {% for person in persons %}
-    {{person.name}} {{person.surname}} 
+    <a href="{{path('showOne_action', {"id":person.id})}}">{{person.name}}</a> {{person.surname}} 
     <a href="{{path('modyfy_action', {"id":person.id})}}"><button>Edytuj kontakt</button></a>
     <a href="{{path('delete_action', {"id":person.id})}}"><button>Usuń</button></a>
     
     <hr>
     {% endfor %}
-
+    <br>
 <a href="{{path('new_action')}}">Dodaj nową osobę</a>
 {% endblock %}

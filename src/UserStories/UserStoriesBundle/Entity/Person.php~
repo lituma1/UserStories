@@ -124,27 +124,4 @@ class Person
     {
         return $this->description;
     }
-
-    /**
-     * Set address
-     *
-     * @param \UserStories\UserStoriesBundle\Entity\Address $address
-     * @return Person
-     */
-    public function setAddress(\UserStories\UserStoriesBundle\Entity\Address $address = null)
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    /**
-     * Get address
-     *
-     * @return \UserStories\UserStoriesBundle\Entity\Address 
-     */
-    public function getAddress()
-    {
-        return $this->address;
-    }
 }

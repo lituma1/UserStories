@@ -3,5 +3,16 @@
 {% block title %}USBundle:Person:modify{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Person:modify page</h1>
+<h1>Aktualne dane</h1>
+<h3> Imię: {{person.name}}</h3>
+<h3>Nazwisko: {{person.surname}}</h3>
+<p> Opis: {{person.description}}</p>
+<a href="{{path('addAddress_action', {"id":person.id})}}"><button>Dodaj nowy adres</button></a>
+<button>Usuń adres</button>
+<h2>Zmień dane podstawowe</h2>
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
+<hr>
+<a href="{{path('main_page')}}">Powrót do strony głównej</a>
 {% endblock %}

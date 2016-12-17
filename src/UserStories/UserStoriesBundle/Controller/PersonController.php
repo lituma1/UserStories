@@ -43,10 +43,32 @@ class PersonController extends Controller {
      * @Route("/{id}/modify", name="modyfy_action")
      * @Method({"GET", "POST"})
      */
-    public function modifyAction($id) {
-        return $this->render('USBundle:Person:modify.html.twig', array(
-                        // ...
-        ));
+    public function modifyAction(Request $request, $id) {
+        
+        $repo = $this->getDoctrine()->getRepository('USBundle:Person');
+            $person = $repo->findOneById($id);
+        $form = $this->createFormBuilder($person)
+                ->add('name', 'text', array('label' => 'Imię'))
+                ->add('surname', 'text', array('label' => 'Nazwisko'))
+                ->add('description', 'text', array('label' => 'Opis'))
+                ->add('save', 'submit', array('label' => 'Potwierdź zmiany'))
+                ->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+
+            $person = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($person);
+
+            $em->flush();
+            return $this->render('USBundle:Person:show_one.html.twig', array(
+                        'person' => $person));
+        }
+ 
+       return $this->render('USBundle:Person:modify.html.twig', array(
+                       'form' => $form->createView(), 'person' => $person));
+        
     }
 
     /**
@@ -75,6 +97,7 @@ class PersonController extends Controller {
 
     /**
      * @Route("/main", name="main_page")
+     * 
      */
     public function showAllAction() {
 
@@ -86,12 +109,15 @@ class PersonController extends Controller {
     }
 
     /**
-     * @Route("/{id}")
+     * @Route("/{id}", name="showOne_action")
+     * @Method({"GET"})
      */
     public function showOneByIdAction($id) {
 
         $repository = $this->getDoctrine()->getRepository('USBundle:Person');
         $person = $repository->find($id);
+        
+        
 
         return $this->render('USBundle:Person:show_one.html.twig', array(
                     'person' => $person
