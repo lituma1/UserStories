@@ -3,7 +3,7 @@
 
 
 {% block body %}
-
+<a href="{{path('main_page')}}">Powrót do strony głównej</a>
 
 <h3> Imię: {{person.name}}</h3>
 <h3>Nazwisko: {{person.surname}}</h3>
@@ -23,5 +23,5 @@
 <a href="{{path('modyfy_action', {"id":person.id})}}"><button>Edytuj kontakt</button></a>
 <br>
 <hr>
-<a href="{{path('main_page')}}">Powrót do strony głównej</a>
+
 {% endblock %}

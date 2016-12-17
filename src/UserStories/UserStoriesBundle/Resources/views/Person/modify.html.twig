@@ -3,16 +3,30 @@
 {% block title %}USBundle:Person:modify{% endblock %}
 
 {% block body %}
-<h1>Aktualne dane</h1>
-<h3> Imię: {{person.name}}</h3>
-<h3>Nazwisko: {{person.surname}}</h3>
-<p> Opis: {{person.description}}</p>
-<a href="{{path('addAddress_action', {"id":person.id})}}"><button>Dodaj nowy adres</button></a>
-<button>Usuń adres</button>
-<h2>Zmień dane podstawowe</h2>
-{{ form_start(form) }}
-{{ form_widget(form) }}
-{{ form_end(form) }}
-<hr>
-<a href="{{path('main_page')}}">Powrót do strony głównej</a>
+    <a href="{{path('main_page')}}">Powrót do strony głównej</a>
+    <h1>Aktualne dane</h1>
+    <h3> Imię: {{person.name}}</h3>
+    <h3>Nazwisko: {{person.surname}}</h3>
+    <p> Opis: {{person.description}}</p>
+    {% if person.address == true %}
+        <p> Miejscowość: {{person.address.city}}</p>
+        <p> Ulica: {{person.address.street}}</p>
+        <p> Numer domu: {{person.address.number}}</p>
+        <p> Numer mieszkania: {{person.address.apartmant}}</p>
+        <a href="{{path('deleteAddress_action', {"id":person.id})}}"><button>Usuń ten adres</button></a>
+    {% else %}
+        <p>nie wprowadzono adresu dla tego kontaktu</p>
+        <a href="{{path('addAddress_action', {"id":person.id})}}"><button>Dodaj nowy adres</button></a>   
+    {% endif %}
+
+
+
+
+
+    <h2>Zmień dane podstawowe</h2>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+    <hr>
+    <a href="{{path('main_page')}}">Powrót do strony głównej</a>
 {% endblock %}

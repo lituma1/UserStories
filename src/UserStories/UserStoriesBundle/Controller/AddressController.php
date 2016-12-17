@@ -42,14 +42,14 @@ class AddressController extends Controller {
             }
             $em = $this->getDoctrine()->getManager();
             if (empty($person->getAddress())) {
-                
-                
-                $em->persist($address);
-                $person->setAddress($address);
+
+
+                $em->persist($address1);
+                $person->setAddress($address1);
                 $em->persist($person);
                 $em->flush();
             } else {
-               
+
                 $em->persist($person);
                 $em->flush();
             }
@@ -71,11 +71,18 @@ class AddressController extends Controller {
     }
 
     /**
-     * @Route("/deleteAddress")
+     * @Route("/{id}/deleteAddress", name="deleteAddress_action")
      */
-    public function deleteAddressAction() {
+    public function deleteAddressAction($id) {
+        $repository = $this->getDoctrine()->getRepository('USBundle:Person');
+        $person = $repository->find($id);
+        $address = null;
+        $person->setAddress($address);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($person);
+        $em->flush();
         return $this->render('USBundle:Address:delete_address.html.twig', array(
-                        // ...
+                    'tekst' => 'adres został usunięty możesz dodać nowy'
         ));
     }
 
