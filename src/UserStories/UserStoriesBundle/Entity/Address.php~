@@ -154,4 +154,44 @@ class Address
     {
         return $this->apartmant;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->persons = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add persons
+     *
+     * @param \UserStories\UserStoriesBundle\Entity\Person $persons
+     * @return Address
+     */
+    public function addPerson(\UserStories\UserStoriesBundle\Entity\Person $persons)
+    {
+        $this->persons[] = $persons;
+
+        return $this;
+    }
+
+    /**
+     * Remove persons
+     *
+     * @param \UserStories\UserStoriesBundle\Entity\Person $persons
+     */
+    public function removePerson(\UserStories\UserStoriesBundle\Entity\Person $persons)
+    {
+        $this->persons->removeElement($persons);
+    }
+
+    /**
+     * Get persons
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPersons()
+    {
+        return $this->persons;
+    }
 }
