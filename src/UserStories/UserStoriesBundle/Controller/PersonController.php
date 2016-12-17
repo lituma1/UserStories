@@ -83,8 +83,9 @@ class PersonController extends Controller {
             $em = $this->getDoctrine()->getManager(); 
             $em->remove($person);
             $em->flush();
-            return $this->render('USBundle:Person:delete.html.twig', array(
-                        'tekst' => 'usunięto kontakt'
+            $persons = $repository->findAll();
+            return $this->render('USBundle:Person:showAll.html.twig', array(
+                        'persons' => $persons
         ));
         } else {
             return $this->render('USBundle:Person:delete.html.twig', array(

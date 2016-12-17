@@ -5,31 +5,48 @@
 {% block body %}
     <a href="{{path('main_page')}}">Powrót do strony głównej</a>
 
-    <h3> Imię: {{person.name}}</h3>
-    <h3>Nazwisko: {{person.surname}}</h3>
-    <p> Opis: {{person.description}}</p>
-    <h3> Adres: </h3>
+    <h3> {{person.name}} {{person.surname}}</h3>
+    
+    <h4> Opis: {{person.description}}</h4>
+    
+    <h4> Adres: </h4>
     {% if person.address == true %}
-        <p> Miejscowość: {{person.address.city}}</p>
-        <p> Ulica: {{person.address.street}}</p>
-        <p> Numer domu: {{person.address.number}}</p>
-        <p> Numer mieszkania: {{person.address.apartmant}}</p>
+        <p> {{person.address.city}} ul.{{person.address.street}} {{person.address.number}}/
+        {{person.address.apartmant}}</p>
+        
 
     {% else %}
         <p>nie wprowadzono adresu dla tego kontaktu</p>
     {% endif %}
-    <h3>Telefon: </h3>
+    <h4>Telefon: </h4>
     
     {% if person.phones|length != 0 %}
         {% for phone in person.phones %}
-            <p>Numer: {{phone.number}}</p>
-            <p>Typ: {{phone.type}}</p>             
+            <p>{{phone.number}} {{phone.type}}</p>
+                       
         {% endfor %}   
 
     {% else %}
         <p>nie wprowadzono telefonu dla tego kontaktu</p>
     {% endif %}
+    
+    <h4>Email: </h4>
+    {% if person.emails|length != 0 %}
+        {% for email in person.emails %}
+
+            <p>{{email.mail}} {{email.type}}</p>
+           
+          
+        {% endfor %}   
+
+
+
+    {% else %}
+        <p>nie wprowadzono adresu email dla tego kontaktu</p>
+
+    {% endif %}
     <br>
+    
     <a href="{{path('modyfy_action', {"id":person.id})}}"><button>Edytuj kontakt</button></a>
     <br>
     <hr>

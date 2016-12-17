@@ -4,16 +4,16 @@
 
 {% block body %}
     <a href="{{path('main_page')}}">Powrót do strony głównej</a>
-    <h1>Aktualne dane</h1>
-    <h3> Imię: {{person.name}}</h3>
-    <h3>Nazwisko: {{person.surname}}</h3>
-    <p> Opis: {{person.description}}</p>
+    <h3>Zmień dane podstawowe</h3>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+    <hr>
+
     <h3>Adres: </h3>
     {% if person.address == true %}
-        <p> Miejscowość: {{person.address.city}}</p>
-        <p> Ulica: {{person.address.street}}</p>
-        <p> Numer domu: {{person.address.number}}</p>
-        <p> Numer mieszkania: {{person.address.apartmant}}</p>
+        <p> {{person.address.city}} ul.{{person.address.street}} {{person.address.number}}/
+            {{person.address.apartmant}}</p>
         <a href="{{path('deleteAddress_action', {"id":person.id})}}"><button>Usuń ten adres</button></a>
     {% else %}
         <p>nie wprowadzono adresu dla tego kontaktu</p>
@@ -23,13 +23,13 @@
     {% if person.phones|length != 0 %}
         {% for phone in person.phones %}
 
-            <p>Numer: {{phone.number}}</p>
-            <p>Typ: {{phone.type}}</p>
+            <p>{{phone.number}} {{phone.type}}
+                <a href="{{path('deletePhone_action', {"id":phone.id})}}">
+                    <button>Usuń ten telefon</button>
+                </a> 
+            </p>
 
-            <a href="{{path('deletePhone_action', {"id":phone.id})}}"><button>Usuń telefon</button></a>  
         {% endfor %}   
-
-
 
     {% else %}
         <p>nie wprowadzono telefonu dla tego kontaktu</p>
@@ -37,14 +37,28 @@
     {% endif %}
     <a href="{{path('addPhone_action', {"id":person.id})}}"><button>Dodaj nowy telefon</button></a>  
     <h3>Email: </h3>
+    {% if person.emails|length != 0 %}
+        {% for email in person.emails %}
+
+            <p>{{email.mail}} {{email.type}}
+              <a href="{{path('deleteEmail_action', {"id":email.id})}}">
+                  <button>Usuń ten email</button>
+              </a>    
+            </p>
+           
+
+            
+        {% endfor %}   
+
+
+
+    {% else %}
+        <p>nie wprowadzono adresu email dla tego kontaktu</p>
+
+    {% endif %}
+    <a href="{{path('addEmail_action', {"id":person.id})}}"><button>Dodaj nowy email</button></a> 
 
 
 
 
-    <h2>Zmień dane podstawowe</h2>
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
-    <hr>
-    <a href="{{path('main_page')}}">Powrót do strony głównej</a>
 {% endblock %}
