@@ -3,25 +3,35 @@
 
 
 {% block body %}
-<a href="{{path('main_page')}}">Powrót do strony głównej</a>
+    <a href="{{path('main_page')}}">Powrót do strony głównej</a>
 
-<h3> Imię: {{person.name}}</h3>
-<h3>Nazwisko: {{person.surname}}</h3>
-<p> Opis: {{person.description}}</p>
-<h3> Adres: </h3>
-{% if person.address == true %}
-    <p> Miejscowość: {{person.address.city}}</p>
-    <p> Ulica: {{person.address.street}}</p>
-    <p> Numer domu: {{person.address.number}}</p>
-    <p> Numer mieszkania: {{person.address.apartmant}}</p>
-    
+    <h3> Imię: {{person.name}}</h3>
+    <h3>Nazwisko: {{person.surname}}</h3>
+    <p> Opis: {{person.description}}</p>
+    <h3> Adres: </h3>
+    {% if person.address == true %}
+        <p> Miejscowość: {{person.address.city}}</p>
+        <p> Ulica: {{person.address.street}}</p>
+        <p> Numer domu: {{person.address.number}}</p>
+        <p> Numer mieszkania: {{person.address.apartmant}}</p>
+
     {% else %}
         <p>nie wprowadzono adresu dla tego kontaktu</p>
-{% endif %}
- 
+    {% endif %}
+    <h3>Telefon: </h3>
+    
+    {% if person.phones|length != 0 %}
+        {% for phone in person.phones %}
+            <p>Numer: {{phone.number}}</p>
+            <p>Typ: {{phone.type}}</p>             
+        {% endfor %}   
 
-<a href="{{path('modyfy_action', {"id":person.id})}}"><button>Edytuj kontakt</button></a>
-<br>
-<hr>
+    {% else %}
+        <p>nie wprowadzono telefonu dla tego kontaktu</p>
+    {% endif %}
+    <br>
+    <a href="{{path('modyfy_action', {"id":person.id})}}"><button>Edytuj kontakt</button></a>
+    <br>
+    <hr>
 
 {% endblock %}

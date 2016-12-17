@@ -61,14 +61,6 @@ class AddressController extends Controller {
                     'form' => $form->createView(), 'person' => $person));
     }
 
-    /**
-     * @Route("/modyfyAddress")
-     */
-    public function modyfyAddressAction() {
-        return $this->render('USBundle:Address:modyfy_address.html.twig', array(
-                        // ...
-        ));
-    }
 
     /**
      * @Route("/{id}/deleteAddress", name="deleteAddress_action")
@@ -81,8 +73,8 @@ class AddressController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $em->persist($person);
         $em->flush();
-        return $this->render('USBundle:Address:delete_address.html.twig', array(
-                    'tekst' => 'adres został usunięty możesz dodać nowy'
+        return $this->render('USBundle:Person:show_one.html.twig', array(
+                    'person' => $person
         ));
     }
 
